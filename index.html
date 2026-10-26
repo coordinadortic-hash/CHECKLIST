@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist de Revisión de Equipos - FRIOCOSTA SISTEMAS TIC</title>
+    <title>Checklist Didáctica de Revisión TIC - FRIOCOSTA</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -12,10 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f1f5f9;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
         .card-shadow {
             box-shadow: 0 4px 20px -2px rgba(0, 32, 96, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
@@ -26,69 +29,116 @@
         }
     </style>
 </head>
-<body class="min-h-screen pb-12">
+<body class="min-h-screen pb-16">
 
-    <!-- Header / Navbar -->
+    <!-- Header Corporativo -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            <!-- Logo FRIOCOSTA SISTEMAS TIC -->
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <svg width="180" height="48" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Circle Badge -->
+                <svg width="180" height="46" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="30" cy="30" r="26" fill="#003399"/>
                     <path d="M 18 18 H 36 V 25 H 25 V 32 H 33 V 38 H 25 V 44 H 18 Z" fill="white"/>
                     <path d="M 40 40 C 37 44 31 46 25 46 C 15 46 8 39 8 30 C 8 21 15 14 25 14 C 31 14 37 16 40 20 L 35 24 C 32 21 29 20 25 20 C 19 20 14 24 14 30 C 14 36 19 40 25 40 C 29 40 32 39 35 36 Z" fill="white"/>
-                    <!-- Text Label -->
                     <text x="68" y="38" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="22" font-style="italic" fill="#003399" letter-spacing="0.5">SISTEMAS TIC</text>
                 </svg>
             </div>
             
-            <div class="flex items-center gap-2 bg-blue-50 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-200">
-                <i data-lucide="shield-check" class="w-4 h-4 text-blue-700"></i>
-                <span>Gestión de Inventario & Mantenimiento</span>
+            <div class="flex items-center gap-3">
+                <button type="button" onclick="toggleQuickShortcuts()" class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm">
+                    <i data-lucide="zap" class="w-4 h-4 text-amber-600"></i>
+                    <span>Comandos Rápidos</span>
+                </button>
+                <div class="flex items-center gap-2 bg-blue-50 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-200">
+                    <i data-lucide="graduation-cap" class="w-4 h-4 text-blue-700"></i>
+                    <span>Programa de Formación & Soporte TIC</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 pt-6 space-y-6">
+    <main class="max-w-6xl mx-auto px-4 pt-6 space-y-6">
 
-        <!-- Banner de Bienvenida -->
-        <div class="bg-gradient-to-r from-[#003399] to-blue-800 rounded-2xl p-6 text-white card-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <!-- Banner Principal -->
+        <div class="bg-gradient-to-r from-[#003399] via-blue-900 to-blue-800 rounded-2xl p-6 text-white card-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <h1 class="text-2xl font-bold tracking-tight">Checklist de Revisión Técnica de Equipos</h1>
-                <p class="text-blue-100 text-sm mt-1">Diligencie la verificación técnica para generar y exportar el informe auditable.</p>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-amber-400 text-blue-950 font-black text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-md">Guía para Pasantes</span>
+                    <span class="text-blue-200 text-xs font-medium">Revisión guiada paso a paso</span>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight">Manual & Checklist de Soporte a Computadores</h1>
+                <p class="text-blue-100 text-sm mt-1">Siga cada punto con atención. Si tiene dudas, utilice los botones de guía didáctica y copiado de comandos.</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-right border border-white/20">
-                <span class="text-xs text-blue-200 block uppercase font-medium">Fecha Actual</span>
-                <span id="currentDateDisplay" class="font-bold text-sm">--/--/----</span>
+            <div class="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-xl text-right border border-white/20">
+                <span class="text-xs text-blue-200 block uppercase font-medium">Fecha de Operación</span>
+                <span id="currentDateDisplay" class="font-bold text-sm tracking-wide">--/--/----</span>
             </div>
         </div>
 
-        <!-- Formulario Datos Generales -->
+        <!-- Acordeón Desplegable: Barra Rápida de Comandos para el Pasante -->
+        <div id="quickShortcutsPanel" class="hidden bg-white border-2 border-amber-300 rounded-2xl p-5 card-shadow transition-all">
+            <div class="flex items-center justify-between border-b border-amber-100 pb-3 mb-4">
+                <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                    <i data-lucide="terminal" class="w-5 h-5 text-amber-600"></i>
+                    <span>Atajos de Teclado y Comandos Esenciales (Presiona Win + R o CMD)</span>
+                </div>
+                <button onclick="toggleQuickShortcuts()" class="text-xs text-slate-400 hover:text-slate-600 font-bold">Cerrar ✕</button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-slate-700">msinfo32</div>
+                        <div class="text-[10px] text-slate-500">Resumen completo del PC</div>
+                    </div>
+                    <button onclick="copyToClipboard('msinfo32')" class="text-xs bg-white hover:bg-slate-100 border px-2 py-1 rounded font-bold text-[#003399]">Copiar</button>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-slate-700">dfrgui</div>
+                        <div class="text-[10px] text-slate-500">Comprobar si es SSD o HDD</div>
+                    </div>
+                    <button onclick="copyToClipboard('dfrgui')" class="text-xs bg-white hover:bg-slate-100 border px-2 py-1 rounded font-bold text-[#003399]">Copiar</button>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-slate-700">cleanmgr</div>
+                        <div class="text-[10px] text-slate-500">Liberador de espacio en disco</div>
+                    </div>
+                    <button onclick="copyToClipboard('cleanmgr')" class="text-xs bg-white hover:bg-slate-100 border px-2 py-1 rounded font-bold text-[#003399]">Copiar</button>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-slate-700">appwiz.cpl</div>
+                        <div class="text-[10px] text-slate-500">Programas instalados</div>
+                    </div>
+                    <button onclick="copyToClipboard('appwiz.cpl')" class="text-xs bg-white hover:bg-slate-100 border px-2 py-1 rounded font-bold text-[#003399]">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Datos Generales de la Inspección -->
         <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-4">
             <h2 class="text-base font-bold text-slate-800 flex items-center gap-2 border-b border-slate-100 pb-3">
-                <i data-lucide="user-check" class="w-5 h-5 text-[#003399]"></i>
-                1. Información del Inspector y Ubicación
+                <i data-lucide="clipboard-list" class="w-5 h-5 text-[#003399]"></i>
+                1. Datos de Inspección y Clasificación
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Nombre Inspector -->
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre del Técnico / Inspector <span class="text-red-500">*</span></label>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Técnico / Pasante Responsable <span class="text-red-500">*</span></label>
                     <div class="relative">
-                        <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
-                        <input type="text" id="inspectorName" placeholder="Ej. Juan Pérez" 
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                        <input type="text" id="inspectorName" placeholder="Ej. Juan Pérez (Pasante)" 
                             class="w-full pl-9 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
                     </div>
                 </div>
 
-                <!-- Selección de Sede -->
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Sede de Inspección <span class="text-red-500">*</span></label>
                     <div class="relative">
                         <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
                         <select id="sedeSelect" class="w-full pl-9 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all appearance-none">
-                            <option value="" disabled selected>Seleccione una sede...</option>
+                            <option value="" disabled selected>Seleccione sede...</option>
                             <option value="Bogota">Bogotá</option>
                             <option value="Cartagena">Cartagena</option>
                             <option value="Barranquilla">Barranquilla</option>
@@ -100,13 +150,12 @@
                     </div>
                 </div>
 
-                <!-- Tipo de Revisión -->
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Tipo de Revisión <span class="text-red-500">*</span></label>
                     <div class="relative">
                         <i data-lucide="wrench" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
                         <select id="tipoRevisionSelect" class="w-full pl-9 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all appearance-none">
-                            <option value="" disabled selected>Seleccione el tipo...</option>
+                            <option value="" disabled selected>Seleccione tipo...</option>
                             <option value="Revision Previa">Revisión Previa</option>
                             <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
                             <option value="Mantenimiento Correctivo">Mantenimiento Correctivo</option>
@@ -117,144 +166,505 @@
             </div>
         </div>
 
-        <!-- Barra de Avance -->
+        <!-- 2. Registro de Inventario del Equipo -->
+        <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-4">
+            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <i data-lucide="cpu" class="w-5 h-5 text-[#003399]"></i>
+                2. Ficha de Inventario, Criticidad y Reporte de Fallas
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre del Equipo (Hostname) <span class="text-red-500">*</span></label>
+                    <input type="text" id="pcHostname" placeholder="Ej. FC-BOG-015" 
+                        class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Usuario Responsable / Asignado <span class="text-red-500">*</span></label>
+                    <input type="text" id="assignedUser" placeholder="Ej. Ana Gómez (Contabilidad)" 
+                        class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Marca y Modelo <span class="text-red-500">*</span></label>
+                    <input type="text" id="pcBrandModel" placeholder="Ej. Dell OptiPlex 3080 / HP ProDesk" 
+                        class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Número de Serial / Placa de Activo <span class="text-red-500">*</span></label>
+                    <input type="text" id="pcSerial" placeholder="Ej. SN-8923412 / PL-045" 
+                        class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Estado General Físico/Lógico <span class="text-red-500">*</span></label>
+                    <select id="pcGeneralStatus" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all">
+                        <option value="Excelente">Excelente (Impecable, 100% operativo)</option>
+                        <option value="Bueno" selected>Bueno (Operativo regular, detalles menores)</option>
+                        <option value="Regular">Regular (Requiere mantenimiento o ajuste)</option>
+                        <option value="Malo">Malo (Crítico / No operativo / Roto)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nivel de Criticidad / Prioridad de Falla <span class="text-red-500">*</span></label>
+                    <select id="issuePriority" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all font-semibold">
+                        <option value="Baja (Rutinario)" selected>Baja - Sin fallas críticas (Rutinario)</option>
+                        <option value="Media (Atención Próxima)">Media - Lentitud / Disco con poco espacio</option>
+                        <option value="Alta (Urgente)">Alta - Antivirus inactivo / Daño eléctrico / Fallo de booteo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Progreso Dinámica -->
         <div class="bg-white rounded-2xl p-5 card-shadow border border-slate-100">
             <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-600"></i> Avance de Verificación
+                    <i data-lucide="check-circle" class="w-4 h-4 text-blue-600"></i> Progreso de la Revisión
                 </span>
                 <span id="progressPercentage" class="text-sm font-extrabold text-[#003399]">0% Completado</span>
             </div>
             <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
                 <div id="progressBar" class="bg-gradient-to-r from-blue-600 to-[#003399] h-full rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2">Marque las casillas conforme verifique cada parámetro en el computador evaluado.</p>
         </div>
 
-        <!-- Checklist de Preguntas -->
-        <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-4">
-            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2 border-b border-slate-100 pb-3">
-                <i data-lucide="list-checks" class="w-5 h-5 text-[#003399]"></i>
-                2. Parámetros Técnicos a Evaluar
-            </h2>
+        <!-- 3. Checklist Dividido en Categorías con Alertas Didácticas -->
+        <div id="sectionsContainer" class="space-y-6"></div>
 
-            <div id="checklistContainer" class="space-y-3">
-                <!-- Se generan dinámicamente -->
-            </div>
-        </div>
-
-        <!-- Observaciones Adicionales -->
+        <!-- 4. Observaciones Finales -->
         <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-2">
             <label class="block text-xs font-semibold text-slate-700 flex items-center gap-2">
                 <i data-lucide="file-text" class="w-4 h-4 text-[#003399]"></i>
-                Observaciones Generales o Diagnóstico Técnico (Opcional)
+                Observaciones Generales, Diagnóstico o Justificación de Hallazgos
             </label>
-            <textarea id="generalObservations" rows="3" placeholder="Ingrese cualquier anotación relevante sobre el estado físico o de software del equipo..." 
+            <textarea id="generalObservations" rows="3" placeholder="Si el equipo falló alguna prueba o presenta ruidos extraños, software sospechoso o faltantes, descríbalo aquí detalladamente..." 
                 class="w-full p-3 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#003399] focus:outline-none transition-all resize-none"></textarea>
         </div>
 
-        <!-- Botón Exportar Informe -->
+        <!-- Botón Exportar -->
         <div class="flex justify-end pt-2">
             <button onclick="exportToExcel()" class="w-full md:w-auto bg-[#003399] hover:bg-blue-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 text-sm active:scale-95">
-                <i data-lucide="download" class="w-5 h-5"></i>
-                <span>EXTRAER INFORME EXCEL</span>
+                <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+                <span>EXTRAER INFORME EXCEL (.XLSX)</span>
             </button>
         </div>
 
     </main>
 
-    <!-- Modal de Confirmación -->
+    <!-- Modal de Notificación -->
     <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl animate-bounce-short">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
             <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
-                <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+                <i data-lucide="download" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-slate-800">¡Informe Generado!</h3>
             <p id="modalMessage" class="text-xs text-slate-600 leading-relaxed"></p>
-            <button onclick="closeModal()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2.5 rounded-xl text-sm transition-all">
-                Aceptar
+            <button onclick="closeModal()" class="w-full bg-[#003399] hover:bg-blue-800 text-white font-semibold py-2.5 rounded-xl text-sm transition-all">
+                Cerrar
             </button>
         </div>
     </div>
 
-    <!-- Script de Funcionamiento -->
+    <!-- Toast de Notificación de Copiado -->
+    <div id="copyToast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl hidden z-50 flex items-center gap-2 border border-slate-700">
+        <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toastMsg">Comando copiado al portapapeles</span>
+    </div>
+
     <script>
-        // Preguntas solicitadas
-        const questionsList = [
-            { id: "q1", title: "Cuenta con licencia Office", desc: "Verificar Microsoft 365 u Office activado legalmente." },
-            { id: "q2", title: "Cuenta con antivirus", desc: "Verificar solución Antivirus corporativa activa y actualizada." },
-            { id: "q3", title: "Se realizó scannow desde CMD", desc: "Ejecutado 'sfc /scannow' en consola de comandos como administrador." },
-            { id: "q4", title: "Cuenta con correo corporativo", desc: "Correo institucional configurado en Outlook / Cliente web." },
-            { id: "q5", title: "Cuenta con firma de correo", desc: "Firma estándar corporativa adaptada a FRIOCOSTA." },
-            { id: "q6", title: "Se realizó limpieza de temporales", desc: "Eliminación de archivos en %temp%, temp, y Prefetch." },
-            { id: "q7", title: "Se rectificó ser el mismo PC del inventario", desc: "Coincidencia de Sarlaft/Placa/Serial físico con la base de datos." },
-            { id: "q8", title: "Se rectificó que cuenta con 16GB de RAM", desc: "Memoria RAM instalada confirmada en las propiedades del sistema." },
-            { id: "q9", title: "Se rectificó que cuenta con disco SSD", desc: "Unidad de estado sólido confirmada (NVMe o SATA SSD)." },
-            { id: "q10", title: "Se rectificó que todo está en la nube", desc: "Sincronización activa de OneDrive / Nube corporativa." },
-            { id: "q11", title: "Se rectificó que está en dominio / cuenta protegida", desc: "Equipo enlazado a Active Directory o Azure AD con clave segura." }
+        // Estructura didáctica enriquecida con alertas y comandos directos
+        const checkSections = [
+            {
+                title: "A. Revisión Física y Conectividad Periférica",
+                icon: "monitor",
+                items: [
+                    { 
+                        id: "chk_perif", 
+                        label: "Verificar que el monitor, teclado y mouse funcionen correctamente.", 
+                        desc: "Comprobar respuesta táctil, iluminación y display sin líneas ni parpadeo.",
+                        warning: "No desconectes ni conectes pantallas por VGA/HDMI con fuerza. Siempre asegura que las clavijas entren rectas.",
+                        guide: [
+                            "<strong>Monitor:</strong> Enciéndalo y observe si existen líneas horizontales/verticales, parpadeo o píxeles muertos.",
+                            "<strong>Teclado:</strong> Abra el Bloc de notas y presione tecla por tecla, verificando Shift, Espacio y Bloq Mayús.",
+                            "<strong>Mouse:</strong> Verifique el clic izquierdo, clic derecho y el desplazamiento suave de la rueda (scroll)."
+                        ]
+                    },
+                    { 
+                        id: "chk_cables", 
+                        label: "Revisar cables de energía y conexión de red (LAN).", 
+                        desc: "Verificar integridad física del cable de poder y conector RJ45 / enlace Wi-Fi.",
+                        warning: "Si un cable de poder tiene la clavija de tierra partida o el forro pelado, debe ser reemplazado de inmediato.",
+                        guide: [
+                            "<strong>Poder:</strong> Compruebe que esté bien ajustado a la fuente y conectado a la UPS o regulador.",
+                            "<strong>Cable de red (RJ45):</strong> Verifique que la pestaña plástica de sujeción no esté rota y que los LEDs del puerto parpadeen.",
+                            "Verifique la IP asignada ejecutando en CMD el comando rápido."
+                        ],
+                        cmd: "ipconfig /all"
+                    },
+                    { 
+                        id: "chk_danos", 
+                        label: "Comprobar que no haya cables sueltos o daños visibles en el chasis/cables.", 
+                        desc: "Inspección de desgaste, dobleces excesivos o fisuras plásticas.",
+                        guide: [
+                            "Revise el chasis del computador por golpes, abolladuras o tornillos faltantes.",
+                            "Organice los cables detrás del escritorio evitando que cuelguen hacia los pies del usuario."
+                        ]
+                    },
+                    { 
+                        id: "chk_vent", 
+                        label: "Revisar que las rejillas de ventilación no estén obstruidas.", 
+                        desc: "Verificar flujo de aire libre en la fuente y ventiladores del CPU.",
+                        warning: "El equipo debe estar al menos a 10 cm de distancia de la pared para no sobrecalentar la fuente ni el procesador.",
+                        guide: [
+                            "Inspeccione visualmente si hay polvo acumulado en la parte frontal o trasera.",
+                            "Escuche si el ventilador emite chirridos o zumbidos mecánicos forzados."
+                        ]
+                    },
+                    { 
+                        id: "chk_usb", 
+                        label: "Verificar que las entradas USB estén visualmente en buen estado.", 
+                        desc: "Sin pines torcidos, sulfatación ni holguras en los puertos frontales y traseros.",
+                        warning: "Un puerto USB con pines torcidos tocando el chasis metálico causará un cortocircuito que apaga la placa madre.",
+                        guide: [
+                            "Inspeccione con una linterna los puertos USB frontales y posteriores.",
+                            "Compruebe que la lengüeta plástica interna no esté partida ni los 4 pines de cobre doblados.",
+                            "Inserte una memoria USB para verificar el reconocimiento instantáneo en Windows."
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "B. Limpieza y Mantenimiento Físico",
+                icon: "sparkles",
+                items: [
+                    { 
+                        id: "chk_limpieza_ext", 
+                        label: "Limpiar monitor, teclado, mouse y carcasa exterior.", 
+                        desc: "Uso de paños de microfibra y solución desinfectante / alcohol isopropílico seguro.",
+                        warning: "¡REGLA DE ORO! NUNCA rociar líquidos directamente sobre la pantalla o el teclado; humedezca siempre primero el paño.",
+                        guide: [
+                            "<strong>Monitor:</strong> Humedezca un paño de microfibra con líquido para pantallas y limpie suavemente en una sola dirección.",
+                            "<strong>Teclado y Carcasa:</strong> Limpie con paño ligeramente humedecido con alcohol isopropílico al 70%."
+                        ]
+                    },
+                    { 
+                        id: "chk_polvo", 
+                        label: "Retirar el polvo superficial con herramientas adecuadas.", 
+                        desc: "Uso de brocha antiestática o soplador/aire comprimido en ranuras.",
+                        warning: "¡CUIDADO! Al soplar ventiladores con aire comprimido, sostén las aspas con el dedo o un lápiz para no quemar el rodamiento ni generar corriente inversa hacia la tarjeta madre.",
+                        guide: [
+                            "Pase una brocha suave por las rendijas externas.",
+                            "Sople a una distancia prudente (mínimo 15 cm) para no expulsar condensación líquida del aire comprimido."
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "C. Diagnóstico de Rendimiento, Disco y Hardware",
+                icon: "hard-drive",
+                items: [
+                    { 
+                        id: "chk_ram", 
+                        label: "Verificar la memoria RAM instalada (Rectificar si cuenta con 16 GB).", 
+                        desc: "Comprobar velocidad y cantidad total de RAM en Administrador de Tareas / Propiedades.",
+                        guide: [
+                            "Presione <strong>Ctrl + Shift + Esc</strong> para abrir el Administrador de Tareas.",
+                            "Vaya a la pestaña <strong>Rendimiento</strong> > <strong>Memoria</strong>.",
+                            "Confirme que indique <strong>16 GB</strong> (o superior) y anote la velocidad."
+                        ],
+                        cmd: "systeminfo | findstr /C:\"Total Physical Memory\""
+                    },
+                    { 
+                        id: "chk_disco_tipo", 
+                        label: "Identificar si el equipo tiene disco SSD o HDD y su salud.", 
+                        desc: "Comprobar presencia de disco de estado sólido (SSD NVMe o SATA).",
+                        guide: [
+                            "Abra el Optimizador de Unidades con el comando rápido a continuación.",
+                            "Compruebe en la columna 'Tipo de medio' que indique <strong>Unidad de estado sólido (SSD)</strong>."
+                        ],
+                        cmd: "dfrgui"
+                    },
+                    { 
+                        id: "chk_disco_cap", 
+                        label: "Consultar la capacidad y el espacio libre disponible en disco.", 
+                        desc: "Asegurar un margen mínimo de 20% de espacio libre en la partición de Windows (C:).",
+                        warning: "Si el disco (C:) está en color rojo (menos del 10% libre), Windows no podrá actualizarse y sufrirá bloqueos continuos.",
+                        guide: [
+                            "Presione <strong>Win + E</strong> y abra 'Este equipo'.",
+                            "Verifique que la unidad C: tenga al menos 20 a 30 GB libres."
+                        ]
+                    },
+                    { 
+                        id: "chk_estabilidad", 
+                        label: "Revisar si el equipo está lento, se bloquea o se reinicia de manera imprevista.", 
+                        desc: "Auditar congelamientos, cuellos de botella en CPU o fallas de memoria (BSOD).",
+                        guide: [
+                            "Consulte con el usuario si ha experimentado pantallazos azules o lentitud inusual.",
+                            "Abra el Monitor de Confiabilidad con el comando a continuación para auditar fallas del sistema."
+                        ],
+                        cmd: "perfmon /rel"
+                    }
+                ]
+            },
+            {
+                title: "D. Sistema Operativo, Mantenimiento Lógico y Red",
+                icon: "shield-alert",
+                items: [
+                    { 
+                        id: "chk_scannow", 
+                        label: "Se realizó verificación de archivos del sistema (SFC /SCANNOW desde CMD).", 
+                        desc: "Ejecución del comando en consola con privilegios de Administrador para reparar archivos corruptos.",
+                        warning: "Debes abrir la consola CMD obligatoriamente como Administrador; de lo contrario saldrá error de privilegios.",
+                        guide: [
+                            "Presione tecla Windows, escriba <strong>cmd</strong>, clic derecho y <strong>Ejecutar como Administrador</strong>.",
+                            "Copie y pegue el comando a continuación y presione Enter.",
+                            "Espere que finalice al 100% hasta confirmar la reparación de archivos."
+                        ],
+                        cmd: "sfc /scannow"
+                    },
+                    { 
+                        id: "chk_temporales", 
+                        label: "Se realizó limpieza de archivos temporales del sistema.", 
+                        desc: "Eliminación de archivos en carpetas %temp%, temp y Prefetch.",
+                        guide: [
+                            "Ejecute el comando para abrir la carpeta temporal del usuario.",
+                            "Presione <strong>Ctrl + E</strong>, luego <strong>Shift + Supr</strong> para eliminar todo (omita los que estén en uso).",
+                            "Abra también la herramienta <strong>cleanmgr</strong> para liberar espacio."
+                        ],
+                        cmd: "%temp%"
+                    },
+                    { 
+                        id: "chk_updates", 
+                        label: "Comprobar si Windows presenta actualizaciones pendientes en Windows Update.", 
+                        desc: "Validar parches de seguridad y reiniciar si el sistema lo requiere.",
+                        guide: [
+                            "Abra Windows Update con el atajo a continuación y haga clic en 'Buscar actualizaciones'.",
+                            "Instale parches de seguridad y reinicie el equipo si lo solicita."
+                        ],
+                        cmd: "control /name Microsoft.WindowsUpdate"
+                    },
+                    { 
+                        id: "chk_antivirus", 
+                        label: "Cuenta con antivirus activo, residente y actualizado.", 
+                        desc: "Verificar motor de base de datos de firmas al día y protección en tiempo real.",
+                        warning: "Si el equipo no tiene antivirus o está vencido, márquelo como 'PENDIENTE' y clasifique el reporte como Prioridad Alta.",
+                        guide: [
+                            "Verifique el icono del antivirus en la bandeja del sistema (junto a la hora).",
+                            "Abra el escudo y confirme que diga 'Su dispositivo está protegido'."
+                        ]
+                    },
+                    { 
+                        id: "chk_office", 
+                        label: "Cuenta con licencia de Microsoft Office / 365 activa.", 
+                        desc: "Comprobar suscripción corporativa sin avisos de activación pendiente.",
+                        guide: [
+                            "Abra Word o Excel, vaya a <strong>Archivo</strong> > <strong>Cuenta</strong>.",
+                            "Verifique que la licencia esté activa bajo la cuenta corporativa de FRIOCOSTA."
+                        ]
+                    },
+                    { 
+                        id: "chk_correo", 
+                        label: "Cuenta con correo corporativo y firma institucional configurada.", 
+                        desc: "Verificar cliente Outlook y firma de correo oficial adaptada a FRIOCOSTA.",
+                        guide: [
+                            "Abra Microsoft Outlook y verifique la recepción y envío de correos corporativos.",
+                            "Haga clic en 'Nuevo correo' y rectifique que aparezca la firma oficial de FRIOCOSTA."
+                        ]
+                    },
+                    { 
+                        id: "chk_nube", 
+                        label: "Se rectificó que los archivos de trabajo están sincronizados en la nube.", 
+                        desc: "Sincronización activa de OneDrive / SharePoint corporativo.",
+                        warning: "Asegúrate de que el usuario no guarde información crítica solo en la raíz de C:; debe estar bajo la carpeta sincronizada por OneDrive.",
+                        guide: [
+                            "Verifique la nube azul de OneDrive junto al reloj.",
+                            "Confirme que diga 'Los archivos están actualizados'."
+                        ]
+                    },
+                    { 
+                        id: "chk_dominio", 
+                        label: "Se rectificó que el equipo está en dominio y con cuenta protegida.", 
+                        desc: "Equipo integrado a Active Directory / Azure AD con políticas de contraseñas activas.",
+                        guide: [
+                            "Ejecute el comando para revisar a qué dominio pertenece el computador.",
+                            "Confirme que pertenezca a la red corporativa y no al grupo genérico 'WORKGROUP'."
+                        ],
+                        cmd: "whoami"
+                    }
+                ]
+            }
         ];
 
-        // Inicialización
         document.addEventListener('DOMContentLoaded', () => {
-            // Mostrar Fecha Actual
             const now = new Date();
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
             document.getElementById('currentDateDisplay').innerText = `${day}/${month}/${year}`;
 
-            // Renderizar checklist
-            renderChecklist();
+            renderSections();
             lucide.createIcons();
         });
 
-        function renderChecklist() {
-            const container = document.getElementById('checklistContainer');
+        function renderSections() {
+            const container = document.getElementById('sectionsContainer');
             container.innerHTML = '';
 
-            questionsList.forEach((q, index) => {
-                const card = document.createElement('div');
-                card.className = "bg-slate-50 border border-slate-200 hover:border-blue-300 rounded-xl p-4 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+            checkSections.forEach((section) => {
+                const sectionCard = document.createElement('div');
+                sectionCard.className = "bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-4";
                 
-                card.innerHTML = `
-                    <div class="flex items-start gap-3">
-                        <div class="flex items-center h-6">
-                            <input type="checkbox" id="${q.id}" onchange="updateProgress()" 
-                                class="custom-checkbox w-5 h-5 text-[#003399] rounded border-slate-300 focus:ring-[#003399] cursor-pointer transition-all">
+                let itemsHTML = '';
+                section.items.forEach((item) => {
+                    const guideStepsHTML = item.guide.map((step, idx) => `
+                        <li class="flex items-start gap-2 text-xs text-slate-700 leading-relaxed">
+                            <span class="w-5 h-5 rounded-full bg-blue-100 text-[#003399] flex-shrink-0 flex items-center justify-center font-bold text-[10px] mt-0.5">${idx + 1}</span>
+                            <div>${step}</div>
+                        </li>
+                    `).join('');
+
+                    const warningBoxHTML = item.warning ? `
+                        <div class="mt-2.5 bg-amber-50 border-l-4 border-amber-500 p-2.5 rounded-r-xl flex items-start gap-2 text-amber-900 text-xs">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <div><strong>Advertencia / Qué NO hacer:</strong> ${item.warning}</div>
                         </div>
-                        <div>
-                            <label for="${q.id}" class="text-sm font-semibold text-slate-800 cursor-pointer hover:text-[#003399] transition-colors">
-                                ${index + 1}. ${q.title}
-                            </label>
-                            <p class="text-xs text-slate-500 mt-0.5">${q.desc}</p>
+                    ` : '';
+
+                    const cmdBoxHTML = item.cmd ? `
+                        <div class="mt-3 bg-slate-900 text-slate-100 p-2.5 rounded-xl flex items-center justify-between gap-2 border border-slate-800">
+                            <div class="flex items-center gap-2 overflow-x-auto mono text-xs text-emerald-400">
+                                <span class="text-slate-500 font-bold">$</span>
+                                <code>${item.cmd}</code>
+                            </div>
+                            <button type="button" onclick="copyToClipboard('${item.cmd}')" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-all flex-shrink-0 active:scale-95 shadow-sm">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                <span>Copiar</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="sm:self-center flex items-center">
-                        <span id="badge-${q.id}" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 transition-all">
-                            PENDIENTE
-                        </span>
+                    ` : '';
+
+                    itemsHTML += `
+                        <div class="bg-slate-50 border border-slate-200 hover:border-blue-300 rounded-xl p-4 transition-all space-y-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex items-center h-6">
+                                        <input type="checkbox" id="${item.id}" onchange="updateProgress()" 
+                                            class="checklist-input custom-checkbox w-5 h-5 text-[#003399] rounded border-slate-300 focus:ring-[#003399] cursor-pointer transition-all">
+                                    </div>
+                                    <div>
+                                        <label for="${item.id}" class="text-sm font-semibold text-slate-800 cursor-pointer hover:text-[#003399] transition-colors">
+                                            ${item.label}
+                                        </label>
+                                        <p class="text-xs text-slate-500 mt-0.5">${item.desc}</p>
+                                    </div>
+                                </div>
+                                <div class="sm:self-center flex items-center gap-2">
+                                    <button type="button" onclick="toggleGuide('${item.id}')" 
+                                        class="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#003399] border border-blue-200 transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                                        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                                        <span>Guía y Pasos</span>
+                                        <i data-lucide="chevron-down" id="arrow-${item.id}" class="w-3.5 h-3.5 transition-transform duration-200"></i>
+                                    </button>
+                                    <span id="badge-${item.id}" class="text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 transition-all min-w-[75px] text-center">
+                                        PENDIENTE
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Panel Didáctico Paso a Paso Desplegable -->
+                            <div id="guide-${item.id}" class="hidden mt-3 pt-3 border-t border-slate-200/80 bg-white p-3.5 rounded-xl border space-y-2">
+                                <div class="flex items-center gap-1.5 text-xs font-bold text-[#003399] uppercase tracking-wide">
+                                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                                    Procedimiento sugerido para pasantes:
+                                </div>
+                                <ul class="space-y-2">
+                                    ${guideStepsHTML}
+                                </ul>
+                                ${cmdBoxHTML}
+                                ${warningBoxHTML}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                sectionCard.innerHTML = `
+                    <h2 class="text-base font-bold text-slate-800 flex items-center gap-2 border-b border-slate-100 pb-3">
+                        <i data-lucide="${section.icon}" class="w-5 h-5 text-[#003399]"></i>
+                        ${section.title}
+                    </h2>
+                    <div class="space-y-3">
+                        ${itemsHTML}
                     </div>
                 `;
-                container.appendChild(card);
+                container.appendChild(sectionCard);
             });
         }
 
+        function toggleGuide(itemId) {
+            const panel = document.getElementById(`guide-${itemId}`);
+            const arrow = document.getElementById(`arrow-${itemId}`);
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                panel.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleQuickShortcuts() {
+            const panel = document.getElementById('quickShortcutsPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Copiado: ${text}`);
+            }).catch(() => {
+                // Fallback
+                const tempInput = document.createElement("input");
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                showToast(`Copiado: ${text}`);
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('copyToast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2200);
+        }
+
         function updateProgress() {
-            let checkedCount = 0;
-            questionsList.forEach(q => {
-                const checkbox = document.getElementById(q.id);
-                const badge = document.getElementById(`badge-${q.id}`);
-                if (checkbox && checkbox.checked) {
-                    checkedCount++;
-                    badge.innerText = "CUMPLIDO";
-                    badge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 transition-all";
+            const allInputs = document.querySelectorAll('.checklist-input');
+            let checked = 0;
+
+            allInputs.forEach(input => {
+                const badge = document.getElementById(`badge-${input.id}`);
+                if (input.checked) {
+                    checked++;
+                    if (badge) {
+                        badge.innerText = "CUMPLIDO";
+                        badge.className = "text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 transition-all min-w-[75px] text-center";
+                    }
                 } else if (badge) {
                     badge.innerText = "PENDIENTE";
-                    badge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 transition-all";
+                    badge.className = "text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 transition-all min-w-[75px] text-center";
                 }
             });
 
-            const percent = Math.round((checkedCount / questionsList.length) * 100);
+            const percent = allInputs.length > 0 ? Math.round((checked / allInputs.length) * 100) : 0;
             document.getElementById('progressBar').style.width = `${percent}%`;
             document.getElementById('progressPercentage').innerText = `${percent}% Completado`;
         }
@@ -263,10 +673,17 @@
             const inspector = document.getElementById('inspectorName').value.trim();
             const sede = document.getElementById('sedeSelect').value;
             const tipoRevision = document.getElementById('tipoRevisionSelect').value;
+            
+            const pcHostname = document.getElementById('pcHostname').value.trim();
+            const assignedUser = document.getElementById('assignedUser').value.trim();
+            const pcBrandModel = document.getElementById('pcBrandModel').value.trim();
+            const pcSerial = document.getElementById('pcSerial').value.trim();
+            const pcGeneralStatus = document.getElementById('pcGeneralStatus').value;
+            const issuePriority = document.getElementById('issuePriority').value;
             const observaciones = document.getElementById('generalObservations').value.trim();
 
             if (!inspector) {
-                alert("Por favor ingrese el Nombre del Técnico / Inspector.");
+                alert("Por favor ingrese el Nombre del Técnico / Pasante.");
                 document.getElementById('inspectorName').focus();
                 return;
             }
@@ -280,6 +697,10 @@
                 document.getElementById('tipoRevisionSelect').focus();
                 return;
             }
+            if (!pcHostname || !assignedUser || !pcSerial) {
+                alert("Por favor complete los datos obligatorios del equipo (Nombre del equipo, Usuario responsable y Serial).");
+                return;
+            }
 
             const now = new Date();
             const year = now.getFullYear();
@@ -288,64 +709,70 @@
             const dateStr = `${year}-${month}-${day}`;
             const timeStr = now.toLocaleTimeString();
 
-            // Estructuración de datos para el Excel
+            // Estructura de filas para el archivo Excel organizado
             const reportData = [
                 ["FRIOCOSTA - SISTEMAS TIC"],
-                ["INFORME TÉCNICO DE REVISIÓN DE EQUIPOS COMPUTACIONALES"],
+                ["INFORME INTEGRAL DE REVISIÓN Y MANTENIMIENTO TÉCNICO DE COMPUTADORES"],
                 [""],
-                ["METADATOS DEL REPORTE"],
-                ["Fecha de Inspección:", dateStr],
-                ["Hora de Registro:", timeStr],
-                ["Técnico / Inspector:", inspector],
-                ["Sede de Inspección:", sede],
-                ["Tipo de Revisión:", tipoRevision],
-                ["Observaciones Generales:", observaciones || "Sin observaciones adicionales."],
+                ["DATOS DE AUDITORÍA Y CONTROL"],
+                ["Fecha de Revisión:", dateStr, "Hora de Generación:", timeStr],
+                ["Técnico Inspector / Pasante:", inspector, "Sede:", sede],
+                ["Tipo de Revisión:", tipoRevision, "Prioridad / Criticidad:", issuePriority],
                 [""],
-                ["N°", "ITEM DE VERIFICACIÓN TÉCNICA", "ESTADO", "CUMPLIMIENTO"]
+                ["DATOS DE INVENTARIO DEL EQUIPO"],
+                ["Nombre de Equipo (Host):", pcHostname, "Usuario Asignado:", assignedUser],
+                ["Marca / Modelo:", pcBrandModel, "Serial / Placa:", pcSerial],
+                ["Estado Físico General:", pcGeneralStatus, "Observaciones Técnicas:", observaciones || "Sin observaciones"],
+                [""],
+                ["SECCIÓN", "ÍTEM / PARÁMETRO EVALUADO", "ESTADO", "VERIFICACIÓN"]
             ];
 
-            let countChecked = 0;
-            questionsList.forEach((q, idx) => {
-                const isChecked = document.getElementById(q.id).checked;
-                if (isChecked) countChecked++;
-                reportData.push([
-                    idx + 1,
-                    q.title,
-                    isChecked ? "CUMPLIDO" : "PENDIENTE",
-                    isChecked ? "SI" : "NO"
-                ]);
+            let totalItems = 0;
+            let totalChecked = 0;
+
+            checkSections.forEach(sec => {
+                sec.items.forEach(item => {
+                    totalItems++;
+                    const isChecked = document.getElementById(item.id).checked;
+                    if (isChecked) totalChecked++;
+                    reportData.push([
+                        sec.title,
+                        item.label,
+                        isChecked ? "CUMPLIDO" : "PENDIENTE",
+                        isChecked ? "SI" : "NO"
+                    ]);
+                });
             });
 
-            const totalPercent = Math.round((countChecked / questionsList.length) * 100);
+            const score = Math.round((totalChecked / totalItems) * 100);
             reportData.push([""]);
             reportData.push(["RESUMEN DE RESULTADOS"]);
-            reportData.push(["Total Ítems Evaluados:", questionsList.length]);
-            reportData.push(["Ítems Cumplidos:", countChecked]);
-            reportData.push(["Porcentaje de Cumplimiento:", `${totalPercent}%`]);
+            reportData.push(["Total Parámetros Evaluados:", totalItems]);
+            reportData.push(["Total Parámetros Cumplidos:", totalChecked]);
+            reportData.push(["Porcentaje de Cumplimiento:", `${score}%`]);
 
-            // Crear Hoja e Inserción
+            // Crear el libro de trabajo y hoja
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(reportData);
 
-            // Ajuste de ancho de columnas
+            // Anchos de columna optimizados
             ws['!cols'] = [
-                { wch: 6 },  // N°
-                { wch: 55 }, // Descripción
-                { wch: 15 }, // Estado
-                { wch: 15 }  // Cumplimiento
+                { wch: 35 }, 
+                { wch: 70 }, 
+                { wch: 16 }, 
+                { wch: 16 }  
             ];
 
             XLSX.utils.book_append_sheet(wb, ws, "Revision_Tecnica");
 
-            // Nombre del archivo limpio
-            const sanitizeStr = (str) => str.replace(/[^a-zA-Z0-9]/g, "_");
-            const fileName = `Informe_Revision_TIC_${sanitizeStr(inspector)}_${sanitizeStr(sede)}_${dateStr}.xlsx`;
+            // Nomenclatura del archivo con usuario, sede y fecha
+            const sanitize = (txt) => txt.replace(/[^a-zA-Z0-9]/g, "_");
+            const fileName = `Informe_Revision_TIC_${sanitize(assignedUser || pcHostname)}_${sanitize(sede)}_${dateStr}.xlsx`;
 
-            // Descarga de archivo
             XLSX.writeFile(wb, fileName);
 
-            // Modal de éxito
-            document.getElementById('modalMessage').innerHTML = `Se ha generado correctamente el informe técnico en Excel:<br><strong class="text-[#003399] font-mono text-xs block mt-2">${fileName}</strong>`;
+            // Modal de confirmación
+            document.getElementById('modalMessage').innerHTML = `El reporte se ha generado y descargado exitosamente:<br><strong class="text-[#003399] font-mono text-xs block mt-2">${fileName}</strong>`;
             document.getElementById('successModal').classList.remove('hidden');
         }
 
